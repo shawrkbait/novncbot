@@ -12,6 +12,9 @@ setuptools.setup(
     long_description=long_description,
     url="https://github.com/shawrkbait/novncbot",
     packages=setuptools.find_packages(),
+    install_requires=[
+        "selenium",
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
