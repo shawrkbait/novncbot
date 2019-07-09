@@ -3,6 +3,9 @@ from enum import IntEnum
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.firefox.options import Options
+import logging
+
+log = logging.getLogger(__name__)
 
 class Keys(IntEnum):
   TAB		= 0xff09
@@ -20,7 +23,7 @@ class NoVNCbot(object):
     self.driver = webdriver.Firefox(options=options)
 
   def __sendKey(self, keycode):
-    print("pressing %s" % hex(keycode))
+    log.debug("pressing %s" % hex(keycode))
     self.__sendKeyDown(keycode)
     self.__sendKeyUp(keycode)
 
@@ -44,7 +47,7 @@ class NoVNCbot(object):
   class __rfb_is_ready(object):
     def __call__(self, driver):
       out = driver.execute_script("return rfb._rfb_state")
-      print("Busy waiting for %s == normal" % out)
+      log.debug("Busy waiting for %s == normal" % out)
       if out == "failed":
         raise Exception("RFB failed to connect. Invalid/Expired URL?")
       if out == "normal":
