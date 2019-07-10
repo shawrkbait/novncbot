@@ -72,9 +72,8 @@ if __name__ == "__main__":
   bot = NoVNCbot()
   bot.connect(console_url)
 
-  bot.sendKeys("d")
   bot.sendKeys(Keys.TAB)
-  bot.sendKeys(" TEST123")
+  bot.sendKeys(" biosdevname=0 net.ifnames=0")
   bot.sendKeys(Keys.ENTER)
 
   bot.disconnect()

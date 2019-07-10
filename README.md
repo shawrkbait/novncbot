@@ -12,9 +12,9 @@ console_url = "<noVNC URL>"
 bot = NoVNCbot()
 bot.connect(console_url)
 
-# Add args to the default entry
+# Disable consistent network device naming
 bot.sendKeys(Keys.TAB)
-bot.sendKeys(" biosdevname=1")
+bot.sendKeys(" biosdevname=0 net.ifnames=0")
 bot.sendKeys(Keys.ENTER)
 
 bot.disconnect()
