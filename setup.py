@@ -10,6 +10,7 @@ setuptools.setup(
     author_email="sjohnson@axiomega.com",
     description="An asynchronous noVNC client",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     url="https://github.com/shawrkbait/novncbot",
     packages=setuptools.find_packages(),
     install_requires=[
