@@ -17,10 +17,13 @@ class Keys(IntEnum):
 
 class NoVNCbot(object):
 
-  def __init__(self):
+  def __init__(self, driver=None):
     options = Options()
     options.headless = True
-    self.driver = webdriver.Firefox(options=options)
+    if driver is not None:
+        self.driver = driver
+    else:
+        self.driver = webdriver.Firefox(options=options)
 
   def __sendKey(self, keycode):
     log.debug("pressing %s" % hex(keycode))
