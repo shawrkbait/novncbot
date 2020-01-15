@@ -2,7 +2,9 @@
 from enum import IntEnum
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.options import Options as firefoxOptions
+from selenium.webdriver.chrome.options import Options as chromeOptions
+from selenium.webdriver.remote.webdriver import WebDriver
 import logging
 
 log = logging.getLogger(__name__)
@@ -17,10 +19,29 @@ class Keys(IntEnum):
 
 class NoVNCbot(object):
 
-  def __init__(self):
-    options = Options()
-    options.headless = True
-    self.driver = webdriver.Firefox(options=options)
+  def __init__(self, driver=None):
+    '''
+    Instantiate NoVNCbot for interacting with a VNC Console
+    @param driver: 			Optional override that accepts the following values
+    					String: firefox, ff  -- Creates Firefox browser in headless mode
+					String: chrome  -- Creates chrome browser in headless mode
+					WebDriver:	-- Uses webdriver  created by caller
+					None:	Creates Firefox browser in headless mode
+    '''
+    if isinstance(driver,WebDriver):
+        self.driver = driver
+    elif isinstance(driver,str) and  ( driver.lower() == 'firefox' or driver.lower() == 'ff'):
+        firefox_options = firefoxOptions()
+        firefox_options.headless = True
+        self.driver = webdriver.Firefox(options = firefox_options)
+    elif isinstance(driver,str) and  ( driver.lower() == 'chrome'):
+        chrome_options = chromeOptions()
+        chrome_options.add_argument("--headless")
+        self.driver = webdriver.Chrome(options=chrome_options)
+    else:
+        default_options = firefoxOptions()
+        default_options.headless = True
+        self.driver = webdriver.Firefox(optionsi = default_options)
 
   def __sendKey(self, keycode):
     log.debug("pressing %s" % hex(keycode))
