@@ -41,7 +41,7 @@ class NoVNCbot(object):
     else:
         default_options = firefoxOptions()
         default_options.headless = True
-        self.driver = webdriver.Firefox(optionsi = default_options)
+        self.driver = webdriver.Firefox(options = default_options)
 
   def __sendKey(self, keycode):
     log.debug("pressing %s" % hex(keycode))
