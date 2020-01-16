@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="novncbot",
-    version="0.0.1",
+    version="0.1.0",
     author="Shawn Johnson",
     author_email="sjohnson@axiomega.com",
     description="An asynchronous noVNC client",
